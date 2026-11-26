@@ -4,7 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rail stabilization · iGPC interaction lab</title>
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="lab.css?v=cpu1"><script type="module" src="lab.mjs?v=cpu1"></script>
+  <link rel="stylesheet" href="lab.css?v=reset1"><script type="module" src="lab.mjs?v=reset1"></script>
 </head>
 <body>
 <main class="viewport" aria-labelledby="title">
@@ -14,9 +14,8 @@
   <div class="hud">
     <header class="top">
       <div class="identity"><div class="imprint"><b>iGPC</b></div><h1 id="title">Rail stabilization</h1></div>
-      <button type="button" id="reset" disabled>
-        <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" transform="rotate(-9 12 12)"/><g fill="currentColor" stroke="none"><circle cx="8.5" cy="9" r="1.25"/><circle cx="12" cy="12" r="1.25"/><circle cx="15.5" cy="15" r="1.25"/></g></svg>
-        Randomize rail
+      <button type="button" id="reset" disabled aria-label="Reset simulation" aria-keyshortcuts="R" title="Reset with a new rail position (R)">
+        Reset <kbd aria-hidden="true">R</kbd>
       </button>
     </header>
     <footer class="bottom">
