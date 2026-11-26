@@ -1,1 +1,0 @@
-{"task":"dex3-reactive-stabilization","engine":"browser","available":true,"policy":"rail-expert-e250","observations":"privileged-simulator-state","maxHorizontalPushMps":1.5}
