@@ -1,0 +1,44 @@
+name: Publish project site
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.publish.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Assemble site and verified browser build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          mkdir -p _site/assets/rail-lab "$RUNNER_TEMP/rail-build"
+          cp index.html styles.css script.js .nojekyll LICENSE CITATION.cff README.md _site/
+          cp -a assets/. _site/assets/
+          gh release download rail-e20-decoder-v1 --repo "$GITHUB_REPOSITORY" --pattern 'rail-e20.tar.part*' --dir "$RUNNER_TEMP/rail-build"
+          pieces=("$RUNNER_TEMP"/rail-build/rail-e20.tar.part[0-9][0-9])
+          test "${#pieces[@]}" -eq 14
+          cat "${pieces[@]}" > "$RUNNER_TEMP/rail.tar"
+          echo "d789be086e16021968cff85762807e176ab327516ca47f9329b7b891692f403e  $RUNNER_TEMP/rail.tar" | sha256sum --check --status
+          tar --no-same-owner --no-same-permissions -xf "$RUNNER_TEMP/rail.tar" -C _site/assets/rail-lab
+          test -f _site/assets/rail-lab/index.html
+          test -f _site/assets/rail-lab/runtime/gpu32/weights.json
+          test "$(du -sb _site | cut -f1)" -lt 1000000000
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy
+        id: publish
+        uses: actions/deploy-pages@v4

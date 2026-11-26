@@ -62,3 +62,5 @@
 .citation-header button:hover { background:var(--tint); }
 #copy-status:not(:empty) { flex-basis:100%; color:var(--muted); }
 .citation-section pre { margin:0; padding:clamp(.9rem,2vw,1.5rem); background:var(--tint); border:1px solid var(--line); border-radius:.75rem; font: .875rem/1.65 ui-monospace,monospace; white-space:pre-wrap; overflow-wrap:anywhere; }
+.rail-playground{display:block;width:100%;height:clamp(350px,58vw,650px);border:0;border-radius:1.2rem;background:#24282d}
+.rail-note{font-size:1rem;line-height:1.5;color:#555866;margin:1rem 0 0}

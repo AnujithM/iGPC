@@ -171,6 +171,13 @@ function updateScroll() {
 }
 window.addEventListener('scroll', updateScroll, { passive: true });
 updateScroll();
+const railFrame=document.getElementById('rail-playground');
+if(railFrame && 'IntersectionObserver' in window){
+  let railVisible=false;
+  const notify=()=>railFrame.contentWindow?.postMessage({type:'igpc:rail-visible',visible:railVisible&&!document.hidden},location.origin);
+  new IntersectionObserver(([entry])=>{railVisible=entry.isIntersecting;notify();}).observe(railFrame);
+  railFrame.addEventListener('load',notify);document.addEventListener('visibilitychange',notify);
+}
 
 if ('IntersectionObserver' in window) {
   if (!reducedMotion.matches) document.documentElement.classList.add('enhanced');
