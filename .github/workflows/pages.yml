@@ -33,6 +33,10 @@ jobs:
           cat "${pieces[@]}" > "$RUNNER_TEMP/rail.tar"
           echo "d789be086e16021968cff85762807e176ab327516ca47f9329b7b891692f403e  $RUNNER_TEMP/rail.tar" | sha256sum --check --status
           tar --no-same-owner --no-same-permissions -xf "$RUNNER_TEMP/rail.tar" -C _site/assets/rail-lab
+          # Layer the current compiled UI on the verified, immutable inference release.
+          for f in index.html lab.mjs runtime/rail_standalone.mjs; do
+            cp "assets/rail-lab/$f" "_site/assets/rail-lab/$f"
+          done
           test -f _site/assets/rail-lab/index.html
           test -f _site/assets/rail-lab/runtime/gpu32/weights.json
           test "$(du -sb _site | cut -f1)" -lt 1000000000

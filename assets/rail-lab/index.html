@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rail stabilization · iGPC interaction lab</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="lab.css?v=gpu-check1"><script type="module" src="lab.mjs?v=push2"></script>
+</head>
+<body>
+<main class="viewport" aria-labelledby="title">
+  <div class="world">
+    <canvas id="scene" width="640" height="400" aria-label="Simulated G1 and rail. Drag from the robot and release to push it."></canvas>
+  </div>
+  <div class="hud">
+    <header class="top">
+      <div class="identity"><div class="imprint"><b>iGPC</b><span>Interaction lab</span></div><h1 id="title">Rail stabilization</h1></div>
+      <button type="button" id="reset" disabled>
+        <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" transform="rotate(-9 12 12)"/><g fill="currentColor" stroke="none"><circle cx="8.5" cy="9" r="1.25"/><circle cx="12" cy="12" r="1.25"/><circle cx="15.5" cy="15" r="1.25"/></g></svg>
+        Randomize rail
+      </button>
+    </header>
+    <details id="sensors" open>
+      <summary><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M7.5 7.5a6.4 6.4 0 0 0 0 9m9-9a6.4 6.4 0 0 1 0 9M4.5 4.5a10.6 10.6 0 0 0 0 15m15-15a10.6 10.6 0 0 1 0 15"/></svg>
+        Sensors<svg class="chevron" aria-hidden="true" viewBox="0 0 16 16"><path d="m4 6 4 4 4-4"/></svg></summary>
+      <div class="sensor-body">
+        <figure><figcaption>Depth <small>96 × 64</small></figcaption><canvas id="depth" width="96" height="64" aria-label="Live depth feed; brighter returns are closer"></canvas></figure>
+        <figure><figcaption>LiDAR <small>360°</small></figcaption><canvas id="lidar" width="180" height="16" aria-label="Live LiDAR range image; empty rays are dark"></canvas></figure>
+        <p id="spawn-pose" aria-label="Rail position at reset">Waiting for rail pose…</p>
+      </div>
+    </details>
+    <footer class="bottom">
+      <div class="telemetry"><span class="mode"><i aria-hidden="true"></i><strong id="state" role="status">Starting simulation…</strong></span>
+        <span class="sim-time" title="Simulation time">Sim <span id="clock">0.00 s</span></span>
+      </div>
+      <p id="feedback" aria-live="polite">Drag the robot toward the rail. Release to push.</p>
+      <p id="slow-motion" hidden>Policy: <span id="policy-rate">—</span> Hz on this device · 50 Hz in simulation.</p>
+    </footer>
+  </div>
+  <div id="rail-intro" hidden>
+    <button type="button" id="start-rail" aria-label="Play rail simulation" aria-describedby="download-size">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 4.7c0-.9 1-1.4 1.7-1l12 7.3a1.2 1.2 0 0 1 0 2l-12 7.3c-.7.4-1.7-.1-1.7-1z"/></svg>
+    </button>
+    <span id="download-size">About 0.9 GB on first play</span>
+    <div id="gpu-warning" tabindex="-1" hidden>
+      <strong>Hardware acceleration unavailable</strong>
+      <p id="gpu-warning-detail">Enable graphics acceleration in your browser settings, or try a WebGPU-capable desktop browser. No model is downloaded until you press play.</p>
+    </div>
+  </div>
+</main>
+</body>
+</html>
