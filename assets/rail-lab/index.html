@@ -4,7 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rail stabilization · iGPC interaction lab</title>
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="lab.css?v=gpu-check1"><script type="module" src="lab.mjs?v=push2"></script>
+  <link rel="stylesheet" href="lab.css?v=rate3"><script type="module" src="lab.mjs?v=rate3"></script>
 </head>
 <body>
 <main class="viewport" aria-labelledby="title">
@@ -26,6 +26,7 @@
         <figure><figcaption>Depth <small>96 × 64</small></figcaption><canvas id="depth" width="96" height="64" aria-label="Live depth feed; brighter returns are closer"></canvas></figure>
         <figure><figcaption>LiDAR <small>360°</small></figcaption><canvas id="lidar" width="180" height="16" aria-label="Live LiDAR range image; empty rays are dark"></canvas></figure>
         <p id="spawn-pose" aria-label="Rail position at reset">Waiting for rail pose…</p>
+        <p id="device-timing" aria-label="Local graphics adapter and average time per decision">WebGPU</p>
       </div>
     </details>
     <footer class="bottom">
