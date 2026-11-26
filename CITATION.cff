@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use iGPC in your research, please cite the paper below."
+title: "iGPC: Generative Motion Priors for Object-Aware Humanoid Interaction"
+authors: &authors
+  - {given-names: Anujith, family-names: Muraleedharan}
+  - {given-names: Abdul Ahad, family-names: Butt}
+  - {given-names: Nolan, family-names: Fey}
+  - {given-names: Yash, family-names: Prabhu}
+  - {given-names: Anamika J, family-names: H}
+  - {given-names: Sandor, family-names: Felber}
+  - {given-names: Maurice, family-names: Rahme}
+  - {given-names: Ivan, family-names: Laptev}
+url: "https://anujithm.github.io/iGPC/"
+preferred-citation:
+  type: generic
+  title: "iGPC: Generative Motion Priors for Object-Aware Humanoid Interaction"
+  authors: *authors
+  year: 2026
+  doi: "10.48550/arXiv.2610.08120"
+  url: "https://arxiv.org/abs/2610.08120"
