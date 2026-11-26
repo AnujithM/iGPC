@@ -4,7 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rail stabilization · iGPC interaction lab</title>
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="lab.css?v=auto2"><script type="module" src="lab.mjs?v=auto2"></script>
+  <link rel="stylesheet" href="lab.css?v=cpu1"><script type="module" src="lab.mjs?v=cpu1"></script>
 </head>
 <body>
 <main class="viewport" aria-labelledby="title">
@@ -25,17 +25,16 @@
       </div>
       <p id="feedback" aria-live="polite">Drag the robot toward the rail. Release to push.</p>
       <p id="slow-motion" hidden>Policy: <span id="policy-rate">—</span> Hz on this device · 50 Hz in simulation.</p>
-      <details><summary>Device timing</summary><small id="device-timing">WebGPU</small></details>
+      <details><summary>Device timing</summary><small id="device-timing">—</small></details>
     </footer>
   </div>
   <div id="rail-intro" hidden>
-    <button hidden type="button" id="start-rail" aria-label="Play rail simulation" aria-describedby="download-size">
+    <button hidden type="button" id="start-rail" aria-label="Play rail simulation" aria-describedby="download-size gpu-warning">
       <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 4.7c0-.9 1-1.4 1.7-1l12 7.3a1.2 1.2 0 0 1 0 2l-12 7.3c-.7.4-1.7-.1-1.7-1z"/></svg>
     </button>
     <span id="download-size" hidden>About 0.8 GB on first play</span>
     <div id="gpu-warning" hidden>
-      <strong>Hardware WebGPU unavailable</strong>
-      <p id="gpu-warning-detail">If graphics acceleration is off, enable it in your browser settings and relaunch. Play appears automatically when compatible hardware is available.</p>
+      <span>No hardware WebGPU. You can still play on CPU in slow motion.</span>
     </div>
   </div>
 </main>

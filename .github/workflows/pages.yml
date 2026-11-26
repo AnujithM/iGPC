@@ -38,6 +38,10 @@ jobs:
           jq -e '.policy == "rail-expert-e250" and (.shards | length == 41)' "$lab/runtime/expert/gpu32/weights.json"
           test -f "$lab/runtime/expert/models/features/manifest.json"
           test -f "$lab/runtime/rail_expert_tab.mjs"
+          test -s "$lab/runtime/cpu_dense.wasm"
+          test -s "$lab/runtime/rail_cpu_prior.mjs"
+          test -s "$lab/runtime/rail_cpu_worker.mjs"
+          test -s "$lab/runtime/rail_cpu_core.mjs"
           test ! -e "$lab/runtime/models/sensors"
           test ! -e "$lab/runtime/rail_standalone.mjs"
           test "$(du -sb _site | cut -f1)" -lt 1000000000
