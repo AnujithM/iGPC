@@ -27,18 +27,19 @@ jobs:
           mkdir -p _site/assets/rail-lab "$RUNNER_TEMP/rail-build"
           cp index.html styles.css script.js .nojekyll LICENSE CITATION.cff README.md _site/
           cp -a assets/. _site/assets/
-          gh release download rail-e20-decoder-v1 --repo "$GITHUB_REPOSITORY" --pattern 'rail-e20.tar.part*' --dir "$RUNNER_TEMP/rail-build"
-          pieces=("$RUNNER_TEMP"/rail-build/rail-e20.tar.part[0-9][0-9])
+          gh release download rail-e250-web-v1 --repo "$GITHUB_REPOSITORY" --pattern 'rail-e250.tar.part*' --dir "$RUNNER_TEMP/rail-build"
+          pieces=("$RUNNER_TEMP"/rail-build/rail-e250.tar.part[0-9][0-9])
           test "${#pieces[@]}" -eq 14
           cat "${pieces[@]}" > "$RUNNER_TEMP/rail.tar"
-          echo "d789be086e16021968cff85762807e176ab327516ca47f9329b7b891692f403e  $RUNNER_TEMP/rail.tar" | sha256sum --check --status
+          echo "2a419c3442b465110a410a6d913454809c4d252590e960683b88611ee2782cda  $RUNNER_TEMP/rail.tar" | sha256sum --check --status
           tar --no-same-owner --no-same-permissions -xf "$RUNNER_TEMP/rail.tar" -C _site/assets/rail-lab
-          # Overlay only compiled browser files; model weights stay pinned to the release.
-          for f in index.html lab.mjs lab.css runtime/rail_standalone.mjs runtime/rail_controls.mjs runtime/rail_rays.mjs runtime/rail_scene_render.mjs runtime/rail_gpu_prior.mjs runtime/rail_gpu_sample.mjs; do
-            cp "assets/rail-lab/$f" "_site/assets/rail-lab/$f"
-          done
-          test -f _site/assets/rail-lab/index.html
-          test -f _site/assets/rail-lab/runtime/gpu32/weights.json
+          lab=_site/assets/rail-lab
+          jq -e '.policy == "rail-expert-e250" and .maxHorizontalPushMps == 1.5' "$lab/release.json"
+          jq -e '.policy == "rail-expert-e250" and (.shards | length == 41)' "$lab/runtime/expert/gpu32/weights.json"
+          test -f "$lab/runtime/expert/models/features/manifest.json"
+          test -f "$lab/runtime/rail_expert_tab.mjs"
+          test ! -e "$lab/runtime/models/sensors"
+          test ! -e "$lab/runtime/rail_standalone.mjs"
           test "$(du -sb _site | cut -f1)" -lt 1000000000
       - uses: actions/upload-pages-artifact@v3
         with:
