@@ -4,7 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rail stabilization · iGPC interaction lab</title>
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="lab.css?v=expert1"><script type="module" src="lab.mjs?v=expert1"></script>
+  <link rel="stylesheet" href="lab.css?v=auto2"><script type="module" src="lab.mjs?v=auto2"></script>
 </head>
 <body>
 <main class="viewport" aria-labelledby="title">
@@ -29,15 +29,13 @@
     </footer>
   </div>
   <div id="rail-intro" hidden>
-    <button type="button" id="start-rail" aria-label="Play rail simulation" aria-describedby="download-size">
+    <button hidden type="button" id="start-rail" aria-label="Play rail simulation" aria-describedby="download-size">
       <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 4.7c0-.9 1-1.4 1.7-1l12 7.3a1.2 1.2 0 0 1 0 2l-12 7.3c-.7.4-1.7-.1-1.7-1z"/></svg>
     </button>
-    <span id="download-size">About 0.8 GB on first play</span>
+    <span id="download-size" hidden>About 0.8 GB on first play</span>
     <div id="gpu-warning" hidden>
       <strong>Hardware WebGPU unavailable</strong>
-      <p id="gpu-warning-detail">This page can’t enable graphics acceleration for you. In desktop Chrome, open Settings → System, enable “Use graphics acceleration when available,” then relaunch. If it’s already on, try a supported browser or device.</p>
-      <button id="retry-gpu" type="button">Check again</button>
-      <small id="gpu-result" role="status">No model has been downloaded.</small>
+      <p id="gpu-warning-detail">If graphics acceleration is off, enable it in your browser settings and relaunch. Play appears automatically when compatible hardware is available.</p>
     </div>
   </div>
 </main>
