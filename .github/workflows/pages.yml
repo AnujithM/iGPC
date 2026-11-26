@@ -18,22 +18,29 @@ jobs:
       url: ${{ steps.publish.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/configure-pages@v5
+      - name: Fetch the pinned, finished playground (read only)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: AnujithM/iGPC-rail-playground
+          ref: 65d8f417f07bd6796c0350770016f0bd94e25245
+          ssh-key: ${{ secrets.RAIL_BUILD_SSH_KEY }}
+          persist-credentials: false
+          fetch-depth: 1
+          path: _rail_distribution
       - name: Assemble site and verified browser build
-        env:
-          GH_TOKEN: ${{ github.token }}
+        shell: bash
         run: |
-          set -eu
-          mkdir -p _site/assets/rail-lab "$RUNNER_TEMP/rail-build"
-          cp index.html styles.css script.js .nojekyll LICENSE CITATION.cff README.md _site/
-          cp -a assets/. _site/assets/
-          gh release download rail-e250-web-v1 --repo "$GITHUB_REPOSITORY" --pattern 'rail-e250.tar.part*' --dir "$RUNNER_TEMP/rail-build"
-          pieces=("$RUNNER_TEMP"/rail-build/rail-e250.tar.part[0-9][0-9])
-          test "${#pieces[@]}" -eq 14
-          cat "${pieces[@]}" > "$RUNNER_TEMP/rail.tar"
-          echo "2a419c3442b465110a410a6d913454809c4d252590e960683b88611ee2782cda  $RUNNER_TEMP/rail.tar" | sha256sum --check --status
-          tar --no-same-owner --no-same-permissions -xf "$RUNNER_TEMP/rail.tar" -C _site/assets/rail-lab
+          set -euo pipefail
           lab=_site/assets/rail-lab
+          mkdir -p "$lab"
+          cp index.html styles.css script.js .nojekyll LICENSE CITATION.cff README.md _site/
+          rsync -a --exclude='/rail-lab/' assets/ _site/assets/
+          # Export only the approved static tree, never repository metadata or development files.
+          test "$(git -C _rail_distribution rev-parse HEAD:rail-lab)" = 21dce329bddeb1225bb7d41f7b43ef9370c4ba6c
+          git -C _rail_distribution archive HEAD:rail-lab | tar --no-same-owner --no-same-permissions -xf - -C "$lab"
           jq -e '.policy == "rail-expert-e250" and .maxHorizontalPushMps == 1.5' "$lab/release.json"
           jq -e '.policy == "rail-expert-e250" and (.shards | length == 41)' "$lab/runtime/expert/gpu32/weights.json"
           test -f "$lab/runtime/expert/models/features/manifest.json"
