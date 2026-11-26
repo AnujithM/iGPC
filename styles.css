@@ -20,6 +20,22 @@
 .film-section .video-chapters{display:flex;flex-wrap:wrap;gap:.45rem 1.4rem}.film-section .video-chapters button{padding:.55rem 0;font-size:.9rem}
 @media(max-width:700px){.film-section .video-chapters{gap:.15rem 1rem}}
 
+/* Compact motion mark for the navigation link to the playground. */
+.nav-try {
+  display:inline-flex; align-items:center; justify-content:center; gap:.52rem;
+  min-height:2.75rem; padding:.5rem 1rem; flex:none; white-space:nowrap;
+  font-size:.94rem; font-weight:650; color:#2d2058;
+  background:linear-gradient(115deg,#eee7ff,#c9b8ff);
+  border:1px solid #b9a5f1; border-radius:999px; box-shadow:0 2px 8px #27185220;
+}
+.nav-try:hover {background:linear-gradient(115deg,#f7f3ff,#d6c6ff);border-color:#987ce3}
+.nav-try:focus-visible {outline:3px solid #7655ce;outline-offset:3px;box-shadow:0 0 0 3px white}
+.nav-try-wave {width:1.5rem;height:1rem;overflow:hidden;color:#694aaa}
+.nav-try-wave path {fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+@media (prefers-reduced-motion:no-preference) {
+  .nav-try-wave path {animation:igpc-wave 2.4s linear infinite}
+  @keyframes igpc-wave {to{transform:translateX(-24px)}}
+}
 /* The film's violet sphere forms the dot of the hero wordmark. */
 .hero-logo .brand-i{position:relative;display:inline-block;width:.205em;height:.75em;margin-right:.025em;vertical-align:-.105em;font-size:1em;line-height:1;color:transparent;text-shadow:none}
 .brand-i::before{content:"";position:absolute;inset:auto 0 0;width:.132em;margin-inline:auto;height:.52em;background:#b7a2ff}
