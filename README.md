@@ -6,7 +6,7 @@ Anujith Muraleedharan · Abdul Ahad Butt · Nolan Fey · Yash Prabhu · Anamika 
 
 [![Watch the iGPC project film](assets/films/project-film-017.jpg)](https://anujithm.github.io/iGPC/#project-film)
 
-iGPC adapts a pretrained human-motion controller to interact with objects. In simulation, experts learn where to reach, when to brace against a rail, and how to keep a box moving. A student learns from those experts using depth, LiDAR, and proprioception rather than simulator-only information.
+iGPC adapts a pretrained human-motion controller to interact with objects. In simulation, experts learn where to reach, when to brace against a rail, and how to keep a box moving. A student learns from those experts using depth, LiDAR, and proprioception to deploy on unitree G1.
 
 ## Citation
 
