@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           repository: AnujithM/iGPC-rail-playground
-          ref: 8c1b97354d206a5105d904cf9bb4c59a6962acc4
+          ref: 18bcb4548c7a40719f80544ac060860e858c2321
           ssh-key: ${{ secrets.RAIL_BUILD_SSH_KEY }}
           persist-credentials: false
           fetch-depth: 1
@@ -34,14 +34,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          lab=_site/assets/rail-lab/cal149-r1
+          lab=_site/assets/rail-lab/cal149-r2
           mkdir -p "$lab"
           cp index.html styles.css script.js .nojekyll LICENSE CITATION.cff README.md _site/
           rsync -a --exclude='/rail-lab/' assets/ _site/assets/
           # Export only the approved static tree, never repository metadata or development files.
-          test "$(git -C _rail_distribution rev-parse HEAD:rail-lab)" = 89d3f24eb3bb8e804fc8e9691caae1024cc8654f
+          test "$(git -C _rail_distribution rev-parse HEAD:rail-lab)" = cbec5e657e38d6ebc061f42912de2b10a99c1836
           git -C _rail_distribution archive HEAD:rail-lab | tar --no-same-owner --no-same-permissions -xf - -C "$lab"
           mv "$lab/entry.html" "$lab/../index.html"
+          # Bookmarked r1 entry points should still open the current demo.
+          mkdir -p "$lab/../cal149-r1"
+          sed 's|cal149-r2/index.html|../cal149-r2/index.html|g' "$lab/../index.html" > "$lab/../cal149-r1/index.html"
           cp "$lab/release.json" "$lab/../release.json"
           jq -e '.policy == "rail-expert-e250" and .storage == "cal149-v1" and .modelBytes == 149778520 and .maxHorizontalPushMps == 1.5' "$lab/release.json"
           jq -e '.storage == "cal149-v1" and (.shards | length == 41) and all(.shards[]; (.file | endswith(".qpack")))' "$lab/runtime/expert/gpu32/weights.json"
@@ -52,6 +55,8 @@ jobs:
           test -s "$lab/runtime/rail_cpu_prior.mjs"
           test -s "$lab/runtime/rail_cpu_worker.mjs"
           test -s "$lab/runtime/rail_cpu_core.mjs"
+          test -s "$lab/runtime/rail_cpu_pool.mjs"
+          test -s "$lab/runtime/rail_cpu_rows.mjs"
           test ! -e "$lab/runtime/models/sensors"
           test ! -e "$lab/runtime/rail_standalone.mjs"
           test "$(du -sb _site | cut -f1)" -lt 1000000000
