@@ -88,9 +88,9 @@
 .result-chart h4{font-size:1.2rem;line-height:1.3;letter-spacing:-.025em;margin:0}
 .result-chart header p{color:var(--muted);font-size:.875rem;line-height:1.45;margin:.35rem 0 1.5rem}
 .result-chart dl{display:grid;gap:1.15rem;margin:0}
-.result-series{--fill:#8d76d2;position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:.6rem;isolation:isolate;padding-bottom:1rem;font-size:.875rem;line-height:1.4}
-.result-series.baseline{--fill:#8792a8}
-.result-series.expert{--fill:var(--accent-deep)}
+.result-series{--fill:#aa96db;position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:.6rem;isolation:isolate;padding-bottom:1rem;font-size:.875rem;line-height:1.4}
+.result-series.baseline{--fill:#b1b8c5}
+.result-series.expert{--fill:#c1b3e2}
 .result-series dd{margin:0;font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap}
 .result-series::before{content:"";position:absolute;inset:auto 0 0;height:.5rem;border-radius:2px;
   background:linear-gradient(to right,var(--fill) 0 calc(100% * var(--value) / var(--scale)),#edf0f6 calc(100% * var(--value) / var(--scale)) 100%)}
