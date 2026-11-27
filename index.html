@@ -20,7 +20,7 @@
   <link rel="canonical" href="https://anujithm.github.io/iGPC/">
   <title>iGPC · Object-Aware Humanoid Interaction</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="stylesheet" href="styles.css?v=nav-wave1">
+  <link rel="stylesheet" href="styles.css?v=result-charts1">
   <script src="script.js?v=rail2" defer></script>
 </head>
 <body>
@@ -103,17 +103,41 @@
           <article class="demo-card reveal"><div class="demo-media"><video controls muted loop playsinline preload="none" poster="assets/films/sim-stabilization.jpg" aria-label="Simulation support-assisted stabilization"><source src="assets/films/sim-stabilization.mp4" type="video/mp4"></video><p class="video-error" hidden>Video could not load. <a href="assets/films/sim-stabilization.mp4" target="_blank" rel="noopener">Open the clip ↗</a></p></div><div class="demo-copy"><h3>Reactive stabilization</h3><p>After a push, the G1 grasps the nearby rail to regain its balance.</p><a class="clip-link" href="assets/films/sim-stabilization.mp4" target="_blank" rel="noopener">Open clip <span aria-hidden="true">↗</span></a></div></article>
           <article class="demo-card reveal"><div class="demo-media"><video controls muted loop playsinline preload="none" poster="assets/films/sim-sitting.jpg" aria-label="Simulation sofa sitting demonstration"><source src="assets/films/sim-sitting.mp4" type="video/mp4"></video><p class="video-error" hidden>Video could not load. <a href="assets/films/sim-sitting.mp4" target="_blank" rel="noopener">Open the clip ↗</a></p></div><div class="demo-copy"><h3>Sofa sitting</h3><p>The G1 lowers onto the cushion and holds a seated posture with its feet on the floor.</p><a class="clip-link" href="assets/films/sim-sitting.mp4" target="_blank" rel="noopener">Open clip <span aria-hidden="true">↗</span></a></div></article>
       </div>
-    <div class="evaluation-inline" id="evaluation" aria-labelledby="evaluation-title">
+    <section class="evaluation-inline" id="evaluation" aria-labelledby="evaluation-title">
       <div class="quantitative-results">
-        <div class="section-heading reveal"><div><p class="eyebrow">QUANTITATIVE EVALUATION</p><h3 class="quantitative-title" id="evaluation-title">Measured in simulation.</h3></div><p>Perceptive student performance across<br>three complementary tasks.</p></div>
-        <div class="metrics-grid">
-          <article class="metric"><p class="metric-name">Commanded reaching</p><p class="metric-value">95.95<span>%</span></p><h3>Rail-contact success</h3><p>Perceptive student, compared with 99.32% for the privileged expert.</p><span class="metric-detail">2,048 matched trials per method</span></article>
-          <article class="metric"><p class="metric-name">Support-assisted stabilization</p><p class="metric-value">4.88<span>%</span></p><h3>Fall rate after two pushes</h3><p>Compared with 18.36% for leg-only GPC at a push Δv of 2.0–2.5 m/s.</p><span class="metric-detail">512 matched trials per method</span></article>
-          <article class="metric"><p class="metric-name">Box pushing</p><p class="metric-value">67.59<span>m</span></p><h3>Forward displacement</h3><p>Mean student performance over episodes of up to 60 seconds.</p><span class="metric-detail">±1.05 m across four seed means</span></article>
+        <div class="section-heading"><div><p class="eyebrow">QUANTITATIVE EVALUATION</p><h3 class="quantitative-title" id="evaluation-title">Selected simulation results.</h3></div></div>
+        <div class="result-charts">
+          <article class="result-chart" style="--scale:100; --expert:99.32">
+            <header><h4>Rail reaching</h4><p>Upper-rail contact success · higher is better</p></header>
+            <dl>
+              <div class="result-series" style="--value:95.95"><dt>iGPC perceptive student</dt><dd>95.95%</dd></div>
+              <div class="result-series baseline" style="--value:46.53"><dt>Direct-action MLP student</dt><dd>46.53%</dd></div>
+            </dl>
+            <div class="result-axis" aria-hidden="true"><span>0%</span><span>50%</span><span>100%</span></div>
+            <p class="result-reference">iGPC privileged expert <strong>99.32%</strong></p>
+          </article>
+          <article class="result-chart" style="--scale:20; --expert:4.69">
+            <header><h4>Reactive stabilization</h4><p>Fall rate after two pushes · lower is better</p></header>
+            <dl>
+              <div class="result-series" style="--value:4.88"><dt>iGPC perceptive student</dt><dd>4.88%</dd></div>
+              <div class="result-series baseline" style="--value:18.36"><dt>Leg-only GPC</dt><dd>18.36%</dd></div>
+            </dl>
+            <div class="result-axis" aria-hidden="true"><span>0%</span><span>10%</span><span>20%</span></div>
+            <p class="result-reference">iGPC privileged expert <strong>4.69%</strong></p>
+          </article>
+          <article class="result-chart" style="--scale:80; --expert:66.08">
+            <header><h4>Box pushing</h4><p>Mean forward displacement · 60 s benchmark</p></header>
+            <dl>
+              <div class="result-series" style="--value:67.59"><dt>iGPC perceptive student</dt><dd>67.59 m</dd></div>
+              <div class="result-series baseline" style="--value:45.17"><dt>VisualMimic</dt><dd>45.17 m</dd></div>
+            </dl>
+            <div class="result-axis" aria-hidden="true"><span>0 m</span><span>40 m</span><span>80 m</span></div>
+            <p class="result-reference">iGPC privileged expert <strong>66.08 m</strong></p>
+          </article>
         </div>
-        <details class="benchmark-details"><summary>Evaluation details and comparisons <span aria-hidden="true">+</span></summary><div class="benchmark-content"><div class="table-scroll"><table><caption>Simulation results reported in the paper</caption><thead><tr><th scope="col">Task / metric</th><th scope="col">iGPC student</th><th scope="col">Comparison</th></tr></thead><tbody><tr><th scope="row">Reaching · rail-contact success ↑</th><td>95.95%</td><td>Expert: 99.32%</td></tr><tr><th scope="row">Reaching · body collision ↓</th><td>5.22%</td><td>MLP: 50.73%</td></tr><tr><th scope="row">Two-push stabilization · fall rate ↓</th><td>4.88%</td><td>Leg-only GPC: 18.36%</td></tr><tr><th scope="row">Box pushing · forward displacement ↑</th><td>67.59 ± 1.05 m</td><td>VisualMimic: 45.17 ± 0.07 m</td></tr></tbody></table></div><p>Stabilization uses two pushes with Δv 2.0–2.5 m/s. Box pushing uses a 3.8 kg box, effective friction 0.6, and four seeds with 128 trials per seed. The box comparison matches shared reset and box conditions, while retaining each method’s native simulator and control interface.</p></div></details>
+        <a class="text-link result-source" href="https://arxiv.org/html/2610.08120v2#S5.SS3">Evaluation protocols and full results in the paper</a>
       </div>
-    </div>
+    </section>
 
     </div></section>
 
