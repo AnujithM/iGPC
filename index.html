@@ -20,7 +20,7 @@
   <link rel="canonical" href="https://anujithm.github.io/iGPC/">
   <title>iGPC · Object-Aware Humanoid Interaction</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="stylesheet" href="styles.css?v=result-charts1">
+  <link rel="stylesheet" href="styles.css?v=result-charts2">
   <script src="script.js?v=rail2" defer></script>
 </head>
 <body>
@@ -107,32 +107,32 @@
       <div class="quantitative-results">
         <div class="section-heading"><div><p class="eyebrow">QUANTITATIVE EVALUATION</p><h3 class="quantitative-title" id="evaluation-title">Selected simulation results.</h3></div></div>
         <div class="result-charts">
-          <article class="result-chart" style="--scale:100; --expert:99.32">
+          <article class="result-chart" style="--scale:100">
             <header><h4>Rail reaching</h4><p>Upper-rail contact success · higher is better</p></header>
             <dl>
               <div class="result-series" style="--value:95.95"><dt>iGPC perceptive student</dt><dd>95.95%</dd></div>
               <div class="result-series baseline" style="--value:46.53"><dt>Direct-action MLP student</dt><dd>46.53%</dd></div>
+              <div class="result-series expert" style="--value:99.32"><dt>iGPC privileged expert</dt><dd>99.32%</dd></div>
             </dl>
             <div class="result-axis" aria-hidden="true"><span>0%</span><span>50%</span><span>100%</span></div>
-            <p class="result-reference">iGPC privileged expert <strong>99.32%</strong></p>
           </article>
-          <article class="result-chart" style="--scale:20; --expert:4.69">
+          <article class="result-chart" style="--scale:20">
             <header><h4>Reactive stabilization</h4><p>Fall rate after two pushes · lower is better</p></header>
             <dl>
               <div class="result-series" style="--value:4.88"><dt>iGPC perceptive student</dt><dd>4.88%</dd></div>
               <div class="result-series baseline" style="--value:18.36"><dt>Leg-only GPC</dt><dd>18.36%</dd></div>
+              <div class="result-series expert" style="--value:4.69"><dt>iGPC privileged expert</dt><dd>4.69%</dd></div>
             </dl>
             <div class="result-axis" aria-hidden="true"><span>0%</span><span>10%</span><span>20%</span></div>
-            <p class="result-reference">iGPC privileged expert <strong>4.69%</strong></p>
           </article>
-          <article class="result-chart" style="--scale:80; --expert:66.08">
+          <article class="result-chart" style="--scale:80">
             <header><h4>Box pushing</h4><p>Mean forward displacement · 60 s benchmark</p></header>
             <dl>
               <div class="result-series" style="--value:67.59"><dt>iGPC perceptive student</dt><dd>67.59 m</dd></div>
               <div class="result-series baseline" style="--value:45.17"><dt>VisualMimic</dt><dd>45.17 m</dd></div>
+              <div class="result-series expert" style="--value:66.08"><dt>iGPC privileged expert</dt><dd>66.08 m</dd></div>
             </dl>
             <div class="result-axis" aria-hidden="true"><span>0 m</span><span>40 m</span><span>80 m</span></div>
-            <p class="result-reference">iGPC privileged expert <strong>66.08 m</strong></p>
           </article>
         </div>
         <a class="text-link result-source" href="https://arxiv.org/html/2610.08120v2#S5.SS3">Evaluation protocols and full results in the paper</a>
